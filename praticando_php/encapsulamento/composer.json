@@ -1,0 +1,15 @@
+{
+    "name": "encapsulamento/source",
+    "autoload": {
+        "psr-4": {
+            "Encapsulamento\\Source\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eder",
+            "email": "ederpvenancio@gmail.com"
+        }
+    ],
+    "require": {}
+}

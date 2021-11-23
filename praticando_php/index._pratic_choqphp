@@ -1,0 +1,68 @@
+<?php
+
+$poema = __DIR__ . "/poema.txt";
+
+
+$codepoema = function ($poema, $poematxt){
+    $poematxt = fopen($poema, "w");
+    fwrite($poematxt, "Rosas são vermelhas".PHP_EOL);
+    fwrite($poematxt, "Violetas são azuis".PHP_EOL);
+    fclose($poematxt);
+};
+
+$poematxt = '';
+
+if(!is_file($poema) && !file_exists($poema)){
+    $codepoema($poema, $poematxt);
+} else if(mb_strlen($poema) < 60){
+    $poematxt = fopen($poema, "w");
+    fwrite($poematxt, "Rosas são vermelhas".PHP_EOL);
+    fwrite($poematxt, "Violetas são azuis".PHP_EOL);
+    fwrite($poematxt, "Girassóis são amarelos");
+    fwrite($poematxt, "E o horizonte é cinza");
+    fclose($poematxt);
+    rename($poema, __DIR__ . "/pratica_upload/" . "Poema_florido" . "." . pathinfo($poema)['extension']);
+};
+
+echo "<h1> Envie seu arquivo do poema abaixo!</h1>";
+include __DIR__ . "/B7_PHP/03-manipulacao-e-tratamento/03-10-upload-de-arquivos/form.php";
+
+$getPost = filter_input(INPUT_GET, "post", FILTER_VALIDATE_BOOLEAN);
+
+if($_FILES && !empty($_FILES['file']['name'])){
+    echo "Arquivo permitido";
+    $arquivoUpload = $_FILES["file"];
+    $arquivosPermitidos = [
+        "image/png"
+    ];
+        if(in_array($arquivoUpload['type'], $arquivosPermitidos)){
+            echo "<br>" . "Extensão permitida!";
+               if (move_uploaded_file($arquivoUpload['tmp_name'], __DIR__ . "/pratica_upload/" . $_FILES['file']['name']  )){
+                   echo "<br>" . "Arquivo enviado com sucesso!";                   
+               };
+        } else {
+            echo " <br>"  ." e extensão recusada, falha no envio";
+        };
+
+} else if ($getPost){
+    echo "Houve um erro no arquivo! Cheque seu tamanho e se enviou.";
+} else {
+    if ($_FILES){
+    echo "Não há um arquivo para ser enviado";
+    };
+}
+
+echo '<br>';
+
+echo "<body style='background: skyblue'></body>";
+echo "<img src='pratica_upload/choque.png' width='250px'>";
+echo '<br>';
+echo '<br>';
+echo '<br>';
+
+$cookie_value = "Choque de cultura";
+$cookie = setcookie("Mensagem", $cookie_value, time()+30);
+
+echo $cookie_value;
+
+

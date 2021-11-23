@@ -6,3 +6,5 @@
     </div>
     <button>Enviar Agora!</button>
 </form>
+
+<!-- $form-> indicando o metodo a ser usado --> 

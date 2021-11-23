@@ -1,0 +1,24 @@
+{
+    "name": "upinside/fsphp",
+    "description": "Full stack php developer",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [{
+        "name": "Robson V. Leite",
+        "email": "cursos@upinside.com.br",
+        "homepage": "https://upinside.com.br",
+        "role": "developer"
+    }
+ ],
+ "config": {
+     "vendor-lib": "vendor"
+ }, 
+ "autoload": {
+    "psr-4": {
+        "Source\\": "source/"
+    }
+ },
+ "require": {
+    "phpmailer/phpmailer": "^6.5"
+ }
+}
