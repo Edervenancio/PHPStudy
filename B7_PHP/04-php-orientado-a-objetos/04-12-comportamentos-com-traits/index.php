@@ -1,6 +1,8 @@
 <?php
-require __DIR__ . '/../../fullstackphp/fsphp.php';
+require __DIR__ . '/../../../fullstackphp/fsphp.php';
 fullStackPHPClassName("04.12 - Comportamentos com traits");
+
+
 
 require __DIR__ . "/source/autoload.php";
 
@@ -9,3 +11,40 @@ require __DIR__ . "/source/autoload.php";
  * do objeto (BEHAVES LIKE). http://php.net/manual/pt_BR/language.oop5.traits.php
  */
 fullStackPHPClassSession("trait", __LINE__);
+
+$user = new Source\Traits\User(
+    "ROBSON",
+    "Leite",
+    "Cursos@upinside.com.br"
+);
+
+$address = new Source\Traits\Address(
+    "Nome da rua",
+    3355,
+    "Casa 10"
+);
+
+$register = new Source\Traits\Register(
+    $user,
+    $address
+);
+
+echo '<pre>';
+var_dump($register,
+         $register->getUser(),
+         $register->getAddress(),
+         $register->getUser()->getFirstName(),
+         $register->getAddress()->getStreet()
+);
+echo '</pre>';
+
+$cart = new \Source\Traits\Cart();
+$cart->add(1, "Full Stack PHP Developer", 1, 2000);
+$cart->add(2, "Laravel Developer", 2, 1000);
+$cart->add(3, "WS PHP", 5, 500);
+$cart->remove(2, 1);
+$cart->remove(3, 5);
+
+$cart->checkout($user, $address);
+
+var_dump($cart);
